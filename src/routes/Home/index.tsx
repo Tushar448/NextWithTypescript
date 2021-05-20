@@ -82,14 +82,13 @@ export const Home = () => {
                 homeCategoryData.items &&
                 homeCategoryData.items.length > 0 &&
                 homeCategoryData.items.map((item: any, index: number) => (
-                  <TableRow key={index}>
+                  <TableRow key={index}  onClick={() => getDetails(item)}>
                     <TableCell component="th" scope="row">
                       {item.owner.display_name}
                     </TableCell>
                     <TableCell
                       component="th"
                       scope="row"
-                      onClick={() => getDetails(item)}
                     >
                       {item.title}
                     </TableCell>
