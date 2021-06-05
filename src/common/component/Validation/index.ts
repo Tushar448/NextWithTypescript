@@ -36,7 +36,12 @@ export const loginSchema = (errors: { username: string; password: string }) => {
   export const registrationSchema = (errors: { name: string; password: string, email: string, invalidEmail: string, role: string }) => {
     return object().shape({
       name: string().required(errors.name).trim(),
-      password: string().required(errors.password).trim(),
+      password: string()
+    .required(errors.password)
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Numeric and one special case Character"
+    ),
       email: string()
         .email(errors.invalidEmail)
         .required(errors.email)
