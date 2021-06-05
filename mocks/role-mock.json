@@ -1,0 +1,32 @@
+{
+    "name": "Role",
+    "request": {
+      "url": "/role",
+      "method": "GET"
+    },
+    "responses": {
+      "error": {
+        "status": 200
+      },
+      "success": {
+        "default": true,
+        "data": [{
+            "id": 1,
+            "name": "Admin"  
+          },
+          {
+            "id": 2,
+            "name": "Teacher"  
+          },
+          {
+            "id": 3,
+            "name": "Student"  
+          },
+          {
+            "id": 4,
+            "name": "Parent"  
+          }
+          ]
+      }
+    }
+  }

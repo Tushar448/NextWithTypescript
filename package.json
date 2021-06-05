@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "@ng-apimock/core": "^3.0.1",
     "@ng-apimock/dev-interface": "^2.0.0",
     "axios": "^0.21.1",
