@@ -1,0 +1,18 @@
+{
+    "name": "Registration",
+    "request": {
+      "url": "/registration",
+      "method": "POST"
+    },
+    "responses": {
+      "error": {
+        "status": 200
+      },
+      "success": {
+        "default": true,
+        "data": {
+            "message": "Registration iS Success"
+        }
+      }
+    }
+  }

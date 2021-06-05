@@ -32,3 +32,15 @@ export const loginSchema = (errors: { username: string; password: string }) => {
         .trim()
     });
   };
+
+  export const registrationSchema = (errors: { name: string; password: string, email: string, invalidEmail: string, role: string }) => {
+    return object().shape({
+      name: string().required(errors.name).trim(),
+      password: string().required(errors.password).trim(),
+      email: string()
+        .email(errors.invalidEmail)
+        .required(errors.email)
+        .trim(),
+        role: string().required(errors.role).trim(),
+    });
+  };

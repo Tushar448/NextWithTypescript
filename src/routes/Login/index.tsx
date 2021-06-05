@@ -85,7 +85,9 @@ React.useEffect(() => {
                   />
                 </Grid>
               </Box>
-              <Grid item xs={12}>
+              <Box display="flex">…
+
+              <Grid item xs={1}>
                 <Button
                   variant="text"
                   color="primary"
@@ -95,6 +97,17 @@ React.useEffect(() => {
                   Sign In
                 </Button>
               </Grid>
+              <Grid item xs={1}>
+                <Button
+                  variant="text"
+                  color="primary"
+                  className="fullWidth"
+                  onClick={() => Router.push('signup')}
+                >
+                  Registration
+                </Button>
+              </Grid>
+              </Box>
               <Grid item xs={12}>
                 <Box mt={1}>
                   
