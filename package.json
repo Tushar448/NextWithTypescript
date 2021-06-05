@@ -5,11 +5,16 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "api-mock": "node api-mock.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@ng-apimock/core": "^3.0.1",
+    "@ng-apimock/dev-interface": "^2.0.0",
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "formik": "^2.2.7",
     "formik-material-ui": "^3.0.1",
     "next": "latest",

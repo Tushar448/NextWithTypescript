@@ -1,0 +1,16 @@
+{
+    "name": "mock name for identification",
+    "request": {
+      "url": "/admin/test",
+      "method": "GET"
+    },
+    "responses": {
+      "error": {
+        "status": 200
+      },
+      "success": {
+        "default": true,
+        "data": [123]
+      }
+    }
+  }
