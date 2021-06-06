@@ -20,6 +20,7 @@ export function* fetchTokenFlow() {
           getTokenContentDetails,
           action?.payload
         );
+        sessionStorage.setItem("id", "1")
         yield put(tokenResolvedActionCreator(data));
       } catch (e) {
         yield put(tokenRejectedActionCreator(e));
