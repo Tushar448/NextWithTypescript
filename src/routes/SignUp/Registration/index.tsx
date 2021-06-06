@@ -27,7 +27,7 @@ interface FormValues {
 const validationMessage = {
     name: "Name is Required",
     password: "Password is Required",
-    email: "Password is Required",
+    email: "Email is Required",
     role: "Role is required",
     invalidEmail: "Please enter the valid email"
   };

@@ -1,4 +1,5 @@
 import { string, object, ref } from 'yup';
+const onlyStringRegExp = /^[a-zA-Z]+$/;
 
 
 export const loginSchema = (errors: { username: string; password: string }) => {
@@ -47,5 +48,24 @@ export const loginSchema = (errors: { username: string; password: string }) => {
         .required(errors.email)
         .trim(),
         role: string().required(errors.role).trim(),
+    });
+  };
+
+  export const addEmployeeSchema = (errors: { name: string; code: string, email: string, invalidEmail: string, role: string, gender: string, alphanemeric: string, dob: string, doj: string, salary: string }) => {
+    return object().shape({
+      name: string()
+      .matches(onlyStringRegExp, errors.alphanemeric)
+      .required(errors.name).trim(),
+      code: string().required(errors.code).trim(),
+      email: string()
+        .email(errors.invalidEmail)
+        .required(errors.email)
+        .trim(),
+        role: string().required(errors.role).trim(),
+        gender: string().required(errors.gender).trim(),
+        dob: string().required(errors.dob).trim(),
+        doj: string().required(errors.doj).trim(),
+        salary: string().required(errors.salary).trim(),
+
     });
   };

@@ -35,6 +35,7 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
     const classes= useStyles();
     const dispatch =useDispatch();
     const [listState, setListState] = React.useState<EmployeeListResult[]>(list);
+    const [viewData, setViewData] = React.useState<EmployeeListResult>();
     const [open, setOpen]= React.useState<boolean>(false);
     const handleDelete =(data: EmployeeListResult) => {
         const filterItem = listState.filter((item: EmployeeListResult) => item.id !== data.id)
@@ -54,7 +55,7 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
         <Box>
           <Button color="primary"  onClick={() => setOpen(true)}>Add Customer</Button>
         </Box>
-        <AddCustomer open={open} setOpen={setOpen} roleData={roleData}/>
+        <AddCustomer open={open} setOpen={setOpen} roleData={roleData} viewData={viewData}/>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
@@ -97,6 +98,8 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
                     </TableCell>
                     <TableCell component="th" scope="row">
                       <Button onClick={() => handleDelete(item)}>Delete</Button>
+                      <Button onClick={() => {setOpen(true);setViewData(item)}}>View</Button>
+
                     </TableCell>
                   </TableRow>
                 )): <TableRow><TableCell colSpan={8}><Typography>No data found</Typography></TableCell></TableRow>}

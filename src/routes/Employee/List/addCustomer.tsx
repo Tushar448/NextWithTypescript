@@ -1,65 +1,119 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
-    Grid,
+    Radio,
     Button,
     Dialog,
     DialogTitle,
     DialogContent,
     DialogActions,
-    Box
+    Box,
+    FormControlLabel,
+  FormHelperText,
   } from "@material-ui/core";
   import { Formik, Field, FormikHelpers } from "formik";
   import { TextField } from "formik-material-ui";
   import { Autocomplete } from "@material-ui/lab";
+  import { RadioGroup } from "formik-material-ui";
+  import { useDispatch } from "react-redux";
 
   import {RoleResult} from '../../SignUp/RoleResult';
-  import {registrationSchema} from '../../../common/component/Validation';
+  import {addEmployeeSchema} from '../../../common/component/Validation';
+  import {EmployeeListResult} from '../EmployeeListResult';
+import {addEmployeeActionCreator, clearEmployeeAddData} from '../redux/action/addEmployeeAction';
+import { AlertDialog } from "../../../common/component/AlertDialog";
+import { useTypedSelector } from "../../../common/hook/useTypedSelector";
 
   interface AddCustomerProps {
     open: boolean;
     setOpen: (data: boolean) => void;
-    roleData: RoleResult[]
+    roleData?: RoleResult[];
+    viewData?: EmployeeListResult
   }
 
   interface FormValues {
     name: string;
     email: string;
-    password: string;
+    code: string;
     role: any;
+    gender: string;
+    doj: string
+    dob: string
+    salary: string;
 }
 
 const validationMessage = {
     name: "Name is Required",
-    password: "Password is Required",
-    email: "Password is Required",
+    code: "Code is Required",
+    email: "Email is Required",
     role: "Role is required",
-    invalidEmail: "Please enter the valid email"
-  };
-export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}) => {
+    invalidEmail: "Please enter the valid email",
+    gender: "Gender is required.",
+    alphanemeric: "Please enter alphnemric character only.",
+    dob: "DOB is required",
+    doj: "DOJ is required",
+    salary: "DOJ is required",
 
+  };
+export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData, viewData}) => {
+    const dispatch =useDispatch();
+    const [openSuccessDialog, setSuccessDialog] = useState<boolean>(false);
+    const {addEmployeeData} = useTypedSelector(state =>  state.employeeRoute.addEmployeeState);
+
+    useEffect(() => {
+        if(addEmployeeData) {
+            setSuccessDialog(true)
+        }
+        return () => {
+            if(addEmployeeData) {
+                dispatch(clearEmployeeAddData());
+            }
+        }
+    }, [addEmployeeData])
     const handleClose = () => {
         setOpen(false);
       };
 
       const onSubmit = (
         formValues: FormValues,
-        { setSubmitting }: FormikHelpers<FormValues>
+        { setSubmitting, resetForm  }: FormikHelpers<FormValues>
       ) => {
+          dispatch(addEmployeeActionCreator(formValues));
+          resetForm();
         setSubmitting(false);
       };
+
     return (
+        <>
+        <AlertDialog
+          open={openSuccessDialog}
+          onClose={() => {
+            setSuccessDialog(false);
+            setOpen(false);
+          }}
+          content={{
+            closeButton: "Ok",
+            dialogContent: "Employee is added successfully.",
+            dialogTitle: "Confirmation",
+            confirmButton: "Ok"
+          }}
+        />
+        
         <Formik
         initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          role: ""
+          name: viewData? viewData.firstName: "",
+          email: viewData? viewData.email: "",
+          code: "",
+          role: "",
+          gender: "",
+          doj: "",
+          dob: "",
+          salary: ""
         }}
         onSubmit={onSubmit}
-        validationSchema={registrationSchema(validationMessage)}
+        validationSchema={addEmployeeSchema(validationMessage)}
       >
         {formikProps => {
-          const { errors, touched, submitForm, setFieldValue} = formikProps;
+          const { errors, touched, submitForm, setFieldValue, values, resetForm} = formikProps;
           return (
             <>
         <Dialog
@@ -77,6 +131,7 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
                     name="name"
                     type="text"
                     label="Name"
+                    value={values?.name}
                     variant="outlined"
                     fullWidth
                     component={TextField}
@@ -85,14 +140,15 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
                   </Box>
                   <Box ml={2}>
                   <Field
-                    id="password"
-                    name="password"
-                    type="password"
-                    label="Password"
+                    id="code"
+                    name="code"
+                    type="text"
+                    label="Code"
+                    value={values?.code}
                     variant="outlined"
                     fullWidth
                     component={TextField}
-                    helperText={touched.password && errors.password}
+                    helperText={touched.code && errors.code}
                   />
                   </Box>
               </Box>
@@ -103,6 +159,8 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
                   name='email'
                   type='email'
                   label='Email'
+                  value={values?.email}
+
                   variant='outlined'
                   fullWidth
                   component={TextField}
@@ -134,6 +192,74 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
                   />
                 </Box>
                 </Box>
+                <Box>
+                <Box  display="flex" flexDirection="row" p={1} m={1}>
+                    <Box>
+              <Field
+                id='dob'
+                name='dob'
+                type='date'
+                label='D.O.B'
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                component={TextField}
+                helperText={touched.dob && errors.dob}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              </Box>
+              <Box ml={2}>
+              <Field
+                id='doj'
+                name='doj'
+                type='date'
+                label='D.O.J'
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                component={TextField}
+                helperText={touched.doj && errors.doj}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              </Box>
+            </Box>
+                </Box>
+                <Box  display="flex" flexDirection="row" p={1} m={1}>
+                    <Box>
+                <Field
+                    id="salary"
+                    name="salary"
+                    type="text"
+                    label="Salary"
+                    variant="outlined"
+                    fullWidth
+                    component={TextField}
+                    helperText={touched.salary && errors.salary}
+                  />
+                  </Box>
+                  <Box ml={2}>
+                <Field component={RadioGroup} name='gender'>
+                    <Box>
+                      <FormControlLabel
+                        value="Male"
+                        control={<Radio color='default' />}
+                        label="Male"
+                      />
+                    <FormControlLabel
+                        value="female"
+                        control={<Radio color='default' />}
+                        label="female"
+                      />
+                    </Box>
+                    
+                  {errors && <FormHelperText>{errors.gender}</FormHelperText>}
+                </Field>
+                </Box>
+                </Box>
               </DialogContent>
           <DialogActions>
           <Button
@@ -141,7 +267,7 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
                 >
                   SUbmit
                 </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={() => {handleClose(); resetForm()}} color="primary">
               Cancel
             </Button>
           </DialogActions>
@@ -152,5 +278,6 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData}
      
           
          </Formik>
+         </>
     )
 }
