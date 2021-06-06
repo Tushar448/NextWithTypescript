@@ -8,7 +8,9 @@ import {
     TableHead,
     TableRow,
     Paper,
-    makeStyles
+    makeStyles,
+    Button,
+    Typography
   } from "@material-ui/core";
 
   import { LoginLayout } from "../../../common/component/layout";
@@ -24,7 +26,14 @@ const useStyles = makeStyles({
     }
   });
 export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
-    const classes= useStyles()
+    const classes= useStyles();
+    const [listState, setListState] = React.useState<EmployeeListResult[]>(list);
+
+    const handleDelete =(data: EmployeeListResult) => {
+        const filterItem = listState.filter((item: EmployeeListResult) => item.id !== data.id)
+        setListState(filterItem)
+    }
+
     return(
         <LoginLayout title="Brand">
       <Grid item xs={12}>
@@ -39,12 +48,13 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
                 <TableCell>Salary</TableCell>
                 <TableCell>Role</TableCell>
                 <TableCell>Gender</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {list &&
-                list.length > 0 &&
-                list.map((item: EmployeeListResult) => (
+              {listState &&
+                listState.length > 0 ?
+                listState.map((item: EmployeeListResult) => (
                   <TableRow key={item.id}>
                     <TableCell component="th" scope="row">
                       {`${item.firstName} ${item.lastName}`}
@@ -67,8 +77,11 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
                     <TableCell component="th" scope="row">
                       {item.gender}
                     </TableCell>
+                    <TableCell component="th" scope="row">
+                      <Button onClick={() => handleDelete(item)}>Delete</Button>
+                    </TableCell>
                   </TableRow>
-                ))}
+                )): <TableRow><TableCell colSpan={8}><Typography>No data found</Typography></TableCell></TableRow>}
             </TableBody>
           </Table>
         </TableContainer>
