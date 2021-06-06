@@ -51,7 +51,11 @@ export const loginSchema = (errors: { username: string; password: string }) => {
     });
   };
 
-  export const addEmployeeSchema = (errors: { name: string; code: string, email: string, invalidEmail: string, role: string, gender: string, alphanemeric: string, dob: string, doj: string, salary: string, alphabetical: string }) => {
+  export const addEmployeeSchema = (errors: { name: string; code: string, 
+    email: string, invalidEmail: string, role: string, 
+    gender: string, dob: string, 
+    doj: string, salary: string, alphabetical: string, 
+    alphnumeric: string }) => {
     return object().shape({
       name: string()
       .matches(onlyStringRegExp, errors.alphabetical)
@@ -67,5 +71,14 @@ export const loginSchema = (errors: { username: string; password: string }) => {
         doj: string().required(errors.doj).trim(),
         salary: string().required(errors.salary).trim(),
 
+    });
+  };
+
+  export const addEmailSchema = (errors: {email: string, invalidEmail: string}) => {
+    return object().shape({
+      email: string()
+        .email(errors.invalidEmail)
+        .required(errors.email)
+        .trim()
     });
   };

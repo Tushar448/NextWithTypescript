@@ -51,7 +51,7 @@ const validationMessage = {
     alphanemeric: "Please enter alphnemric character only.",
     dob: "DOB is required",
     doj: "DOJ is required",
-    salary: "DOJ is required",
+    salary: "Salary is required",
     alphabetical: "Please enter only alphabetic word"
   };
 export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData, viewData}) => {

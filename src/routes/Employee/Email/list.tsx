@@ -14,7 +14,7 @@ import {
   } from "@material-ui/core";
   import { LoginLayout } from "../../../common/component/layout";
   import { EmailResult } from "../EmailResult";
-
+import {AddEmail} from './addEmail';
   const useStyles = makeStyles({
     table: {
       minWidth: 650
@@ -27,13 +27,17 @@ import {
 export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
     const classes = useStyles()
     const [listState, setListState] = React.useState<EmailResult[]>(emailList);
+    const [open, setOpen]= React.useState<boolean>(false);
 
     const handleDelete =(data: EmailResult) => {
         const filterItem = listState.filter((item: EmailResult) => item.serialNo !== data.serialNo)
         setListState(filterItem)
     }
     return (
-        <LoginLayout title="Brand">
+        <LoginLayout title="Email">
+          <>
+        <AddEmail open={open} setOpen={setOpen}/>
+
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -57,7 +61,7 @@ export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
                       </TableCell>
                       <TableCell component="th" scope="row">
                         <Button onClick={() => handleDelete(item)}>Delete</Button>
-                        <Button>View</Button>
+                        <Button onClick={() => setOpen(true)}>ADD</Button>
   
                       </TableCell>
                     </TableRow>
@@ -66,6 +70,7 @@ export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
             </Table>
           </TableContainer>
         </Grid>
+        </>
       </LoginLayout>
     )
 }

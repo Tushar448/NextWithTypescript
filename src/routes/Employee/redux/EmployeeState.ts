@@ -1,6 +1,7 @@
 import { EmployeeListResult } from "../EmployeeListResult";
 import {AddEmployeeResult} from '../AddEmployeeResult';
 import { EmailResult } from "../EmailResult";
+import { AddEmailResult } from "../AddEmailResult";
 
 export interface EmployeeListState {
     isEmployeeListError: boolean;
@@ -17,8 +18,13 @@ export interface EmailState {
     emaildata?: EmailResult[];
 }
 
+export interface AddEmailState {
+    isEmailAddError: boolean;
+    emailAddData?: AddEmailResult;
+}
 export interface EmployeeState {
     employeeListState: EmployeeListState;
     addEmployeeState: AddEmployeeState;
-    emailState: EmailState
+    emailState: EmailState;
+    addEmailState: AddEmailState
 }
