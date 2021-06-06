@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { EmployeeList } from "../../../EmployeeListResult";
+import { EmployeeListResult } from "../../../EmployeeListResult";
 
 export async function getEmployeeListDetails() {
-  const { data } = await axios.get<EmployeeList[]>(
+  const { data } = await axios.get<EmployeeListResult[]>(
     "http://localhost:9500/employee/list"
   );
 

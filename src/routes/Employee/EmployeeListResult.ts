@@ -1,4 +1,4 @@
-export interface EmployeeList {
+export interface EmployeeListResult {
     id: number;
     firstName: string;
     lastName: string;
@@ -7,4 +7,5 @@ export interface EmployeeList {
     role: string;
     salary: string;
     email: string;
+    gender: string
 }

@@ -1,9 +1,9 @@
-import { EmployeeList } from "../EmployeeListResult";
+import { EmployeeListResult } from "../EmployeeListResult";
 import {AddEmployeeResult} from '../AddEmployeeResult';
 
 export interface EmployeeListState {
     isEmployeeListError: boolean;
-    employeeListData?: EmployeeList[]
+    employeeListData?: EmployeeListResult[]
 }
 
 export interface AddEmployeeState {

@@ -26,7 +26,7 @@ export const Login: React.FC = () => {
 
 React.useEffect(() => {
   if(token) {
-    Router.push("/brand");
+    Router.push("/employee");
   }
   return ()  => {
     if(token) {

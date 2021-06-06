@@ -4,7 +4,7 @@ import {
     employeeListResolvedActionCreator,
     employeeListRejectedActionCreator,
 } from '../../action/employeeListAction';
-import { EmployeeList } from "../../../EmployeeListResult";
+import { EmployeeListResult } from "../../../EmployeeListResult";
 
 import { getEmployeeListDetails } from './employeeService';
 
@@ -14,7 +14,7 @@ export function* fetchEmployeeListFlow() {
     function* fetchEmployeeActionCreatorFn(
     ) {
       try {
-        const data: EmployeeList[] = yield call(
+        const data: EmployeeListResult[] = yield call(
             getEmployeeListDetails
         );
         yield put(employeeListResolvedActionCreator(data));

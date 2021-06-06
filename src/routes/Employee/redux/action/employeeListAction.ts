@@ -1,4 +1,4 @@
-import { EmployeeList } from "../../EmployeeListResult";
+import { EmployeeListResult } from "../../EmployeeListResult";
 
 export const FETCH_EMPLOYEE_INFO = "Employee/fetchEmployeeInfo";
 export const EMPLOYEE_INFO_RESOLVED = "Employee/employeeListResolved";
@@ -13,7 +13,7 @@ export function fetchEmployeeActionCreator() {
 fetchEmployeeActionCreator.toString = () => FETCH_EMPLOYEE_INFO;
 
 
-export function employeeListResolvedActionCreator(result: EmployeeList[]) {
+export function employeeListResolvedActionCreator(result: EmployeeListResult[]) {
   return {
     type: EMPLOYEE_INFO_RESOLVED,
     payload: result
