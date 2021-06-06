@@ -16,15 +16,19 @@
           },
           {
             "id": 2,
-            "name": "Teacher"  
+            "name": "HR"  
           },
           {
             "id": 3,
-            "name": "Student"  
+            "name": "Software Developer"  
           },
           {
             "id": 4,
-            "name": "Parent"  
+            "name": "Manager"  
+          },
+          {
+            "id": 5,
+            "name": "Team Lead"  
           }
           ]
       }

@@ -1,0 +1,59 @@
+{
+    "name": "Employee List",
+    "request": {
+      "url": "/employee/list",
+      "method": "GET"
+    },
+    "responses": {
+      "error": {
+        "status": 200
+      },
+      "success": {
+        "default": true,
+        "data": [{
+            "id": 1,
+            "firstName": "Ram"  ,
+            "email":"Ram@gmail.com",
+            "dob": "1/01/1990",
+            "role":"Software Developer",
+            "doj": "1/01/2014",
+            "salary": "20000"
+          },
+          {
+            "id": 2,
+            "firstName": "Kunj"  ,
+            "lastName": "Garg",
+            "email":"kunj@gmail.com",
+              "dob": "1/02/1990",
+            "role":"Software Developer",
+              "doj": "1/02/2014",
+            "salary": "30000"
+          
+          
+          },
+          {
+            "id": 3,
+            "firstName": "Kavyansh"  ,
+            "lastName": "Garg",
+            "email":"Kavyansh@gmail.com",
+              "dob": "1/03/1990",
+            "role":"Software Developer",
+              "doj": "1/03/2014",
+                "salary": "40000"
+          
+          },
+          {
+            "id": 4,
+            "firstName": "Lakhan"  ,
+            "lastName": "Garg",
+            "email":"Lakhan@gmail.com",
+              "dob": "1/04/1990",
+            "role":"Software Developer",
+                "doj": "1/04/2014",
+                  "salary": "50000"
+          
+          }
+          ]
+      }
+    }
+  }
