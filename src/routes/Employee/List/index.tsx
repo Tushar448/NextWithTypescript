@@ -14,6 +14,7 @@ import {
     Box
   } from "@material-ui/core";
   import { useDispatch } from "react-redux";
+  import Router from "next/router";
 
   import { LoginLayout } from "../../../common/component/layout";
 import {EmployeeListResult} from '../EmployeeListResult';
@@ -52,8 +53,13 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
     return(
         <LoginLayout title="Brand">
       <Grid item xs={12}>
-        <Box>
+        <Box display="flex" flexDirection="row" >
+          <Box>
           <Button color="primary"  onClick={() => setOpen(true)}>Add Customer</Button>
+        </Box>
+        <Box>
+          <Button color="primary"  onClick={() => Router.push("/email")}>Email</Button>
+        </Box>
         </Box>
         <AddCustomer open={open} setOpen={setOpen} roleData={roleData} viewData={viewData}/>
         <TableContainer component={Paper}>

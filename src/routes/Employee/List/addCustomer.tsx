@@ -52,7 +52,7 @@ const validationMessage = {
     dob: "DOB is required",
     doj: "DOJ is required",
     salary: "DOJ is required",
-
+    alphabetical: "Please enter only alphabetic word"
   };
 export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData, viewData}) => {
     const dispatch =useDispatch();
