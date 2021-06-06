@@ -1,10 +1,10 @@
-import axios from "axios";
+import http from '../../../../../common/token-interceptor';
 
 import { AddEmployeeResult } from "../../../AddEmployeeResult";
 import {AddEmployeePayload} from "../../../AddEmployeePayload"
 
 export async function addEmployeeDetails(params: AddEmployeePayload) {
-  const { data } = await axios.post<AddEmployeeResult>(
+  const { data } = await http.post<AddEmployeeResult>(
     "http://localhost:9500/employee/add", params
   );
 
