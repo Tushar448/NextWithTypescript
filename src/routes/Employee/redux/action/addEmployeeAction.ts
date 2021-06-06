@@ -1,11 +1,11 @@
 import { AddEmployeeResult } from "../../AddEmployeeResult";
-
+import {AddEmployeePayload} from "../../AddEmployeePayload"
 export const ADD_EMPLOYEE = "Employee/addEmployee";
 export const EMPLOYEE_ADD_RESOLVED = "Employee/addEmployeeResolved";
 export const EMPLOYEE_ADD_REJECTED = "Employee/addEmployeenRejected";
 export const EMPLOYEE_ADD_RESET = "Employee/addEmployeeClearData";
 
-export function addEmployeeActionCreator(param: any) {
+export function addEmployeeActionCreator(param: AddEmployeePayload) {
   return {
     type: ADD_EMPLOYEE,
     payload: param
