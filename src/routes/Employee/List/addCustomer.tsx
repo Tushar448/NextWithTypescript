@@ -48,7 +48,7 @@ const validationMessage = {
     role: "Role is required",
     invalidEmail: "Please enter the valid email",
     gender: "Gender is required.",
-    alphanemeric: "Please enter alphnemric character only.",
+    alphnumeric: "Please enter alphnemric character only.",
     dob: "DOB is required",
     doj: "DOJ is required",
     salary: "Salary is required",
