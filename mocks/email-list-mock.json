@@ -1,0 +1,33 @@
+{
+    "name": "Email List",
+    "request": {
+      "url": "/employee/email",
+      "method": "GET"
+    },
+    "responses": {
+      "error": {
+        "status": 200
+      },
+      "success": {
+        "default": true,
+        "data": [{
+            "serialNo": 1,
+            "email":"Ram@gmail.com"
+          },
+          {
+            "serialNo": 2,
+            "email":"kunj@gmail.com"
+          },
+          {
+            "serialNo": 3,
+            "email":"Kavyansh@gmail.com"
+
+          },
+          {
+            "serialNo": 4,
+            "email":"Lakhan@gmail.com"
+          }
+          ]
+      }
+    }
+  }

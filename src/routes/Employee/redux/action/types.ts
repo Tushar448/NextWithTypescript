@@ -2,7 +2,7 @@ import { DynamicActionTypes } from "../../../../redux/DynamicActionTypes";
 
 type EmployeeLisTypes = typeof import("./employeeListAction");
 type AddEmployeeTypes = typeof import("./addEmployeeAction");
-
+type EmailTypes = typeof import("./emailAction");
 export type EmployeeAction = DynamicActionTypes<
-EmployeeLisTypes &  AddEmployeeTypes
+EmployeeLisTypes &  AddEmployeeTypes & EmailTypes
 >;

@@ -7,6 +7,7 @@ import {fetchRegistrationFlow} from '../src/routes/SignUp/redux/saga/Registartio
 import {fetchRoleFlow} from '../src/routes/SignUp/redux/saga/Role/roleSaga';
 import {fetchEmployeeListFlow} from '../src/routes/Employee/redux/saga/EmployeeList/employeeSaga';
 import {addEmployeeFlow} from '../src/routes/Employee/redux/saga/AddEmployee/addEmployeeSaga';
+import {fetchEmailListFlow} from '../src/routes/Employee/redux/saga/Email/emailSaga';
 
 export function* root() {
   yield fork(fetchHomeCategoryFlow);
@@ -15,5 +16,6 @@ export function* root() {
   yield fork(fetchRegistrationFlow);
   yield fork(fetchRoleFlow);
   yield fork(fetchEmployeeListFlow);
-  yield fork(addEmployeeFlow)
+  yield fork(addEmployeeFlow);
+  yield fork(fetchEmailListFlow);
 }

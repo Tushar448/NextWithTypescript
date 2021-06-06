@@ -1,6 +1,6 @@
 import { string, object, ref } from 'yup';
 const onlyStringRegExp = /^[a-zA-Z]+$/;
-
+const alphnumeric = /^[a-z0-9]+$/i;
 
 export const loginSchema = (errors: { username: string; password: string }) => {
     return object().shape({
@@ -51,12 +51,12 @@ export const loginSchema = (errors: { username: string; password: string }) => {
     });
   };
 
-  export const addEmployeeSchema = (errors: { name: string; code: string, email: string, invalidEmail: string, role: string, gender: string, alphanemeric: string, dob: string, doj: string, salary: string }) => {
+  export const addEmployeeSchema = (errors: { name: string; code: string, email: string, invalidEmail: string, role: string, gender: string, alphanemeric: string, dob: string, doj: string, salary: string, alphabetical: string }) => {
     return object().shape({
       name: string()
-      .matches(onlyStringRegExp, errors.alphanemeric)
+      .matches(onlyStringRegExp, errors.alphabetical)
       .required(errors.name).trim(),
-      code: string().required(errors.code).trim(),
+      code: string().matches(alphnumeric, errors.alphnumeric).required(errors.code).trim(),
       email: string()
         .email(errors.invalidEmail)
         .required(errors.email)

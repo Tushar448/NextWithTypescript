@@ -5,6 +5,7 @@ import { EmployeeState } from "../EmployeeState";
 
 import { employeeListReducer } from "./employeeListReducer";
 import {addEmployeeReducer} from './addEmployeeReducer';
+import {emailReducer} from './emailReducer';
 
 export const employeeReducer: Reducer<EmployeeState, EmployeeAction> = (
   state,
@@ -12,6 +13,7 @@ export const employeeReducer: Reducer<EmployeeState, EmployeeAction> = (
 ) => {
   return {
     employeeListState: employeeListReducer(state && state.employeeListState, action),
-    addEmployeeState: addEmployeeReducer(state && state.addEmployeeState, action)
+    addEmployeeState: addEmployeeReducer(state && state.addEmployeeState, action),
+    emailState: emailReducer(state && state.emailState, action)
   };
 };
