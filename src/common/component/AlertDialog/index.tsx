@@ -24,7 +24,7 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
   onClose,
   content,
   handleConfirm,
-  showConfirmButton = false,
+  showConfirmButton,
 }) => {
   const { closeButton, dialogContent, dialogTitle, confirmButton } =
     content || {};

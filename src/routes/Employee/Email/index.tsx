@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import {fetchEmailActionCreator} from '../redux/action/emailAction';
 import { useTypedSelector } from "../../../common/hook/useTypedSelector";
+import { LoginLayout } from "../../../common/component/layout";
 
 import {EmailList} from './list';
 
@@ -16,7 +17,11 @@ export const Email:React.FC = () => {
     },[])
 
     if(emaildata) {
-        return <EmailList emailList={emaildata}/>
+        return (
+            <LoginLayout title="Email">
+                <EmailList emailList={emaildata}/>
+            </LoginLayout>
+        )
     } else if(isEmailError) {
         return <h1>No Data Found</h1>
     } else{

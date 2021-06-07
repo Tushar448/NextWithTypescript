@@ -7,7 +7,7 @@ import {fetchRegistrationFlow} from '../src/routes/SignUp/redux/saga/Registartio
 import {fetchRoleFlow} from '../src/routes/SignUp/redux/saga/Role/roleSaga';
 import {fetchEmployeeListFlow, watchAddEmployeeSuccess} from '../src/routes/Employee/redux/saga/EmployeeList/employeeSaga';
 import {addEmployeeFlow} from '../src/routes/Employee/redux/saga/AddEmployee/addEmployeeSaga';
-import {fetchEmailListFlow} from '../src/routes/Employee/redux/saga/Email/emailSaga';
+import {fetchEmailListFlow, watchAddEmailSuccess} from '../src/routes/Employee/redux/saga/Email/emailSaga';
 import {addEmailFlow} from '../src/routes/Employee/redux/saga/AddEmail/addEmailSaga';
 
 export function* root() {
@@ -21,4 +21,5 @@ export function* root() {
   yield fork(fetchEmailListFlow);
   yield fork(watchAddEmployeeSuccess);
   yield fork(addEmailFlow);
+  yield fork(watchAddEmailSuccess);
 }
