@@ -18,7 +18,7 @@ export const Employee:React.FC = () => {
 
     if(employeeListData) {
         return(
-            <LoginLayout title="Employee">
+            <LoginLayout title="Employee" logoutButton={true}>
                 <EmployeeList list={employeeListData}/>
             </LoginLayout>
         )
