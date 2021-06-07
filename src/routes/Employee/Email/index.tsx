@@ -18,7 +18,7 @@ export const Email:React.FC = () => {
 
     if(emaildata) {
         return (
-            <LoginLayout title="Email">
+            <LoginLayout title="Email" logoutButton={true}>
                 <EmailList emailList={emaildata}/>
             </LoginLayout>
         )

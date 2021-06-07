@@ -8,12 +8,15 @@ import {
   IconButton,
   Box,
   createStyles,
-  Theme
+  Theme,
+  Button
 } from "@material-ui/core";
+import Router from "next/router";
 
 interface LoginLayoutProps {
     children?: JSX.Element;
-    title?: string
+    title?: string;
+    logoutButton?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,10 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-export const LoginLayout:React.FC<LoginLayoutProps> = ({children, title}) => {
+export const LoginLayout:React.FC<LoginLayoutProps> = ({children, title, logoutButton}) => {
   // used for checking current route
   const classes = useStyles();
-
+const handleLogout = () => {
+  Router.push('/login')
+}
   return (
     <>
       <Head>
@@ -46,9 +51,18 @@ export const LoginLayout:React.FC<LoginLayoutProps> = ({children, title}) => {
             color='inherit'
             aria-label='menu'
           ></IconButton>
+          <Box display="flex" flexDirection="row">
           <Typography variant='h6'>
             {title}
           </Typography>
+         { logoutButton && <Box ml={150}>
+          <Button color="primary"  style ={{color: "black"}}onClick={()=> handleLogout()}>Logout</Button>
+        </Box>
+}
+          </Box>
+          
+        
+          
         </Toolbar>
       </AppBar>
       <Box className={classes.meetingBody}>{children}</Box>
