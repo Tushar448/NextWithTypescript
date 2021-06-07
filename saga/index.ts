@@ -5,9 +5,10 @@ import {fetchForgotPasswordFlow} from '../src/routes/Login/redux/saga/ForgotPass
 import {fetchTokenFlow} from '../src/routes/Login/redux/saga/Login/loginsaga';
 import {fetchRegistrationFlow} from '../src/routes/SignUp/redux/saga/Registartion/registartionSaga';
 import {fetchRoleFlow} from '../src/routes/SignUp/redux/saga/Role/roleSaga';
-import {fetchEmployeeListFlow} from '../src/routes/Employee/redux/saga/EmployeeList/employeeSaga';
+import {fetchEmployeeListFlow, watchAddEmployeeSuccess} from '../src/routes/Employee/redux/saga/EmployeeList/employeeSaga';
 import {addEmployeeFlow} from '../src/routes/Employee/redux/saga/AddEmployee/addEmployeeSaga';
 import {fetchEmailListFlow} from '../src/routes/Employee/redux/saga/Email/emailSaga';
+import {addEmailFlow} from '../src/routes/Employee/redux/saga/AddEmail/addEmailSaga';
 
 export function* root() {
   yield fork(fetchHomeCategoryFlow);
@@ -18,4 +19,6 @@ export function* root() {
   yield fork(fetchEmployeeListFlow);
   yield fork(addEmployeeFlow);
   yield fork(fetchEmailListFlow);
+  yield fork(watchAddEmployeeSuccess);
+  yield fork(addEmailFlow);
 }
