@@ -10,9 +10,9 @@ import {
     Paper,
     makeStyles,
     Button,
-    Typography
+    Typography,
+    Box
   } from "@material-ui/core";
-  import { LoginLayout } from "../../../common/component/layout";
   import { EmailResult } from "../EmailResult";
 import {AddEmail} from './addEmail';
   const useStyles = makeStyles({
@@ -28,15 +28,18 @@ export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
     const classes = useStyles()
     const [listState, setListState] = React.useState<EmailResult[]>(emailList);
     const [open, setOpen]= React.useState<boolean>(false);
+    const [viewEmail, setViewEmailState] = React.useState<EmailResult | undefined>(undefined);
 
     const handleDelete =(data: EmailResult) => {
         const filterItem = listState.filter((item: EmailResult) => item.serialNo !== data.serialNo)
         setListState(filterItem)
     }
     return (
-        <LoginLayout title="Email">
           <>
-        <AddEmail open={open} setOpen={setOpen}/>
+          <Box>
+          <Button color="primary"  onClick={() => {setOpen(true); setViewEmailState(undefined)}}>Add Email</Button>
+        </Box>
+        <AddEmail open={open} setOpen={setOpen}  emailInfo={viewEmail}setViewEmailState ={setViewEmailState}/>
 
         <Grid item xs={12}>
           <TableContainer component={Paper}>
@@ -61,7 +64,7 @@ export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
                       </TableCell>
                       <TableCell component="th" scope="row">
                         <Button onClick={() => handleDelete(item)}>Delete</Button>
-                        <Button onClick={() => setOpen(true)}>ADD</Button>
+                        <Button onClick={() => {setViewEmailState(item); setOpen(true)}}>Edit</Button>
   
                       </TableCell>
                     </TableRow>
@@ -71,6 +74,5 @@ export const EmailList: React.FC<EmailListProps> = ({emailList}) => {
           </TableContainer>
         </Grid>
         </>
-      </LoginLayout>
     )
 }

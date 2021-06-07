@@ -16,11 +16,10 @@ import {
   import { useDispatch } from "react-redux";
   import Router from "next/router";
 
-  import { LoginLayout } from "../../../common/component/layout";
 import {EmployeeListResult} from '../EmployeeListResult';
 import { useTypedSelector } from "../../../common/hook/useTypedSelector";
 import {fetchRoleActionCreator} from '../../SignUp/redux/action/roleAction';
-
+import {AlertDialog} from '../../../common/component/AlertDialog'
 import {AddCustomer} from './addCustomer';
 
 interface EmployeeListProps {
@@ -36,11 +35,12 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
     const classes= useStyles();
     const dispatch =useDispatch();
     const [listState, setListState] = React.useState<EmployeeListResult[]>(list);
-    const [viewData, setViewData] = React.useState<EmployeeListResult>();
+    const [viewData, setViewData] = React.useState<EmployeeListResult  | undefined>(undefined);
     const [open, setOpen]= React.useState<boolean>(false);
+    const [openConfirmatioToDelete, setOpenConfirmatioToDelete] = React.useState<boolean>(false);
     const handleDelete =(data: EmployeeListResult) => {
-        const filterItem = listState.filter((item: EmployeeListResult) => item.id !== data.id)
-        setListState(filterItem)
+      setViewData(data)
+      setOpenConfirmatioToDelete(true);
     }
 
     const {roleData} =useTypedSelector(state => state.signUpRoute.roleState);
@@ -50,12 +50,19 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
             dispatch(fetchRoleActionCreator());
         }
     },[])
+    const handleDeletUser =() => {
+      if(viewData) {
+        const filterItem = listState.filter((item: EmployeeListResult) => item.id !== viewData.id)
+        setListState(filterItem)
+        setOpenConfirmatioToDelete(false);
+      }
+    }
+
     return(
-        <LoginLayout title="Brand">
       <Grid item xs={12}>
         <Box display="flex" flexDirection="row" >
           <Box>
-          <Button color="primary"  onClick={() => setOpen(true)}>Add Customer</Button>
+          <Button color="primary"  onClick={() => {setOpen(true); setViewData(undefined)}}>Add Customer</Button>
         </Box>
         <Box>
           <Button color="primary"  onClick={() => Router.push("/email")}>Email</Button>
@@ -112,7 +119,22 @@ export const EmployeeList:React.FC<EmployeeListProps> = ({list}) => {
             </TableBody>
           </Table>
         </TableContainer>
+        <AlertDialog
+          open={openConfirmatioToDelete}
+          onClose={() => {
+            setOpenConfirmatioToDelete(false);
+          }}
+          content={{
+            closeButton: "Cancel",
+            dialogContent: "You really want to delete ?",
+            dialogTitle: "Confirmation",
+            confirmButton: "confirm"
+          }}
+          handleConfirm={() => {
+            handleDeletUser()
+          }}
+          showConfirmButton
+        />
       </Grid>
-    </LoginLayout>
     )
 }

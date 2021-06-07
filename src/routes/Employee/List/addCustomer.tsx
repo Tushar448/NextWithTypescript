@@ -103,14 +103,15 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData,
           name: viewData? viewData.firstName: "",
           email: viewData? viewData.email: "",
           code: "",
-          role: "",
-          gender: "",
+          role: viewData? viewData.role: "",
+          gender: viewData? viewData.gender: "",
           doj: "",
           dob: "",
-          salary: ""
+          salary: viewData? viewData.salary: ""
         }}
         onSubmit={onSubmit}
         validationSchema={addEmployeeSchema(validationMessage)}
+        enableReinitialize
       >
         {formikProps => {
           const { errors, touched, submitForm, setFieldValue, values, resetForm} = formikProps;
@@ -185,6 +186,7 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData,
                         {...params}
                         label='Role'
                         name='role'
+                        value={values.role}
                         variant='outlined'
                         helperText={touched.role && errors.role}
                       ></Field>
@@ -234,6 +236,7 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData,
                     id="salary"
                     name="salary"
                     type="text"
+                    value={values.salary}
                     label="Salary"
                     variant="outlined"
                     fullWidth
@@ -250,7 +253,7 @@ export const AddCustomer:React.FC<AddCustomerProps> = ({open, setOpen, roleData,
                         label="Male"
                       />
                     <FormControlLabel
-                        value="female"
+                        value="Female"
                         control={<Radio color='default' />}
                         label="female"
                       />

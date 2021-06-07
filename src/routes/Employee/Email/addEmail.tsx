@@ -14,10 +14,13 @@ import {
 import {addEmailActionCreator, clearEmailAddData} from '../redux/action/addEmailAction';
 import { AlertDialog } from "../../../common/component/AlertDialog";
 import { useTypedSelector } from "../../../common/hook/useTypedSelector";
+import { EmailResult } from "../EmailResult";
 
   interface AddCustomerProps {
     open: boolean;
     setOpen: (data: boolean) => void;
+    emailInfo?: EmailResult
+    setViewEmailState: (data: EmailResult)=> void
   }
 
   interface FormValues {
@@ -28,7 +31,7 @@ const validationMessage = {
     email: "Email is Required",
     invalidEmail: "Please enter the valid email"
   };
-export const AddEmail:React.FC<AddCustomerProps> = ({open, setOpen}) => {
+export const AddEmail:React.FC<AddCustomerProps> = ({open, setOpen, emailInfo}) => {
     const dispatch =useDispatch();
     const [openSuccessDialog, setSuccessDialog] = useState<boolean>(false);
     const {emailAddData} = useTypedSelector(state =>  state.employeeRoute.addEmailState);
@@ -74,10 +77,11 @@ export const AddEmail:React.FC<AddCustomerProps> = ({open, setOpen}) => {
         
         <Formik
         initialValues={{
-          email:  ""
+          email: emailInfo ? emailInfo.email: ""
         }}
         onSubmit={onSubmit}
         validationSchema={addEmailSchema(validationMessage)}
+        enableReinitialize
       >
         {formikProps => {
           const { errors, touched, submitForm, values, resetForm} = formikProps;
@@ -96,7 +100,7 @@ export const AddEmail:React.FC<AddCustomerProps> = ({open, setOpen}) => {
                   name='email'
                   type='email'
                   label='Email'
-                  value={values?.email}
+                  value={ values.email}
 
                   variant='outlined'
                   fullWidth
