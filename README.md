@@ -1,4 +1,4 @@
-AMS developed in Next.js
+Next with Tyescript developed in Next.js
 
 To install all dependencies run -> ( npm install )
 
